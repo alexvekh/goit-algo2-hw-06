@@ -82,7 +82,8 @@ if st.button("🔍 Start"):
         raw_text = get_clean_text_from_url(url)
         if raw_text:
             result = map_reduce(raw_text)
-            filtered = {word: count for word, count in result.items() if word not in exclude_words}
+            filtered = {word: count for word, count in result.items() if word.isalpha()}
+            filtered = {word: count for word, count in filtered.items() if word not in exclude_words}
             st.success("✅ Done!")
             plot_words(filtered, top_n=top_n)
 
