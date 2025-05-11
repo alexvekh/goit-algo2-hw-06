@@ -88,7 +88,7 @@ if st.button("🔍 Start"):
 
             #st.write("📈 Result:", filtered)
             # sorted_items = sorted(filtered.items(), key=lambda item: item[1], reverse=True)
-            sorted = dict(sorted(filtered.items(), key=lambda item: item[1], reverse=False))
+            sorted = dict(sorted(filtered.items(), key=lambda item: item[1], reverse=True))
 
             st.write("📈 Result:", sorted)
 
