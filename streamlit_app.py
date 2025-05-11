@@ -5,7 +5,7 @@ from collections import defaultdict
 import matplotlib.pyplot as plt
 import string
 
-st.title("🧠 Web Words Frequency Counter (MapReduce)")
+st.title("🧠 URL Words Frequency Counter")
 
 # Функції
 
@@ -70,19 +70,20 @@ def plot_words(freq_dict, top_n=15):
 
 # Інтерфейс
 
-url = st.text_input("🔗 Введіть URL веб-сторінки", "https://finance.yahoo.com/news/wall-street-plays-long-game-190000469.html")
+url = st.text_input("🔗 Enter URL", "https://finance.yahoo.com/news/wall-street-plays-long-game-190000469.html")
 
-exclude_words_input = st.text_area("✂️ Введіть стоп-слова для виключення (через кому)", "the, and, of, a, to, in")
+exclude_words_input = st.text_area("✂️ Add stop words to exclude", "the, and, of, a, to, in")
 exclude_words = set(word.strip().lower() for word in exclude_words_input.split(','))
 
-top_n = st.slider("📊 Кількість топ-слів для відображення", 5, 50, 15)
+top_n = st.slider("📊 Number of top keywords to display", 5, 50, 15)
 
-if st.button("🔍 Аналізувати"):
-    with st.spinner("Завантаження..."):
+if st.button("🔍 Start"):
+    with st.spinner("Loading..."):
         raw_text = get_clean_text_from_url(url)
         if raw_text:
             result = map_reduce(raw_text)
             filtered = {word: count for word, count in result.items() if word not in exclude_words}
-            st.success("✅ Готово!")
-            st.write("📈 Результат підрахунку:", filtered)
-            plot_words(filtered, top_n=top_n)
+            sorted = dict(sorted(filtered.items(), key=lambda item: item[1], reverse=True))
+            st.success("✅ Done!")
+            st.write("📈 Result:", sorted)
+            plot_words(sorted, top_n=top_n)
