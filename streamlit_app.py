@@ -87,6 +87,8 @@ if st.button("🔍 Start"):
             plot_words(filtered, top_n=top_n)
 
             #st.write("📈 Result:", filtered)
-            sorted_items = sorted(filtered.items(), key=lambda item: item[1], reverse=True)
-            st.write("📈 Відсортовані слова:", sorted_items)
+            # sorted_items = sorted(filtered.items(), key=lambda item: item[1], reverse=True)
+            sorted = dict(sorted(filtered.items(), key=lambda item: item[1], reverse=False))
+
+            st.write("📈 Result:", sorted)
 
