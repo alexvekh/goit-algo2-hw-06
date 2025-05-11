@@ -72,7 +72,7 @@ def plot_words(freq_dict, top_n=15):
 
 url = st.text_input("🔗 Enter URL", "https://finance.yahoo.com/news/wall-street-plays-long-game-190000469.html")
 
-exclude_words_input = st.text_area("✂️ Add stop words to exclude", "the, and, of, a, to, in")
+exclude_words_input = st.text_area("✂️ Add stop words to exclude", "the, and, of, a, an, to, in, it, that, not, as, us, for, but, on, or, by, from, news")
 exclude_words = set(word.strip().lower() for word in exclude_words_input.split(','))
 
 top_n = st.slider("📊 Number of top keywords to display", 5, 50, 15)
@@ -85,5 +85,7 @@ if st.button("🔍 Start"):
             filtered = {word: count for word, count in result.items() if word not in exclude_words}
             sorted = dict(sorted(filtered.items(), key=lambda item: item[1], reverse=True))
             st.success("✅ Done!")
-            st.write("📈 Result:", sorted)
-            plot_words(sorted, top_n=top_n)
+            # st.write("📈 Result:", sorted)
+            sorted_items = sorted(filtered.items(), key=lambda item: item[1], reverse=True)
+            st.write("📈 Sorted words:", sorted_items)
+            plot_words(filtered, top_n=top_n)

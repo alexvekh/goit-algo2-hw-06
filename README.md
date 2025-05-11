@@ -1,6 +1,8 @@
 # Web Words Frequency Counter with MapReduce
 This project allows you to download text from any web page, count word frequencies using the MapReduce concept, exclude unnecessary words, and visualize the most frequent ones in a chart.
 
+[![Streamlit App](https://img.shields.io/badge/Live%20App-Open%20Now-brightgreen?style=for-the-badge)](https://webwords.streamlit.app//)
+
 ## 🧠 How It Works?
  -Downloads an HTML page from a given URL.
 - Cleans the text by removing HTML tags, scripts, styles, and punctuation.
